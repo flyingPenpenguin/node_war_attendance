@@ -1,42 +1,43 @@
-function myFunction() {
+// 家名クラス
+class Members {
   
-  // 家名クラス
-  class Members {
-    
-    constructor(id) {
-      
-    }
-  }
+  constructor() {
+    // シート取得
+    this.membersSheet = SHEET.getSheetByName('members');
+    // index noの取得
+    var ids = SHEET.getRange('A:A').getValues().filter(Number);
+    this.indexNo = Math.max.apply(null, ids) + 1;
+  } 
+}
 
-  // キャラクター名クラス
-  class Characters {
+// キャラクター名クラス
+class Characters {
+  
+  constructor(id) {
     
-    constructor(id) {
-      
-    }
   }
+}
+
+// 拠点戦開催日時クラス
+class WarDates {
   
-  // 拠点戦開催日時クラス
-  class WarDates {
+  constructor(id) {
     
-    constructor(id) {
-    
-    }
   }
+}
+
+// 参加記録クラス
+class AttendanceLogs {
   
-  // 参加記録クラス
-  class AttendanceLogs {
-  
-    constructor(id) {
+  constructor(id) {
     
-    }
   }
+}
+
+// 拠点戦結果クラス
+class WarResults {
   
-  // 拠点戦結果クラス
-  class WarResults {
-  
-    constructor(id) {
+  constructor(id) {
     
-    }
   }
 }
