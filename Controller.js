@@ -3,8 +3,6 @@
 /******************************/
 // アクティブシートの取得
 const SHEET = SpreadsheetApp.getActiveSpreadsheet();
-// 最終行の取得
-var LAST_ROW = getLastRow(SHEET);
 
 /*
 * 新しいメンバーの追加を行う
@@ -18,7 +16,7 @@ function addMembers()
   
   // メンバー追加の確認
   var title        = 'メンバーの追加';
-  var prompt       = '新規メンバーの追加を行います';
+  var prompt       = '新規メンバーの追加を行います。';
   var confirmation = ui.alert(title, prompt, ui.ButtonSet.YES_NO);
   
   // YES以外は早期退出
@@ -27,7 +25,7 @@ function addMembers()
   }
   
   // 家名の入力
-  var message    = '家名を入力してください';
+  var message    = '家名を入力してください。';
   var familyName = ui.prompt(message, ui.ButtonSet.OK_CANCEL);
   
   // 重複の確認
@@ -38,8 +36,19 @@ function addMembers()
     return;
   }
 
+  // 初回登録なのでキャラクター名の登録も同時に行う
+  var message       = 'キャラクター名を入力してください。';
+  var characterName = ui.prompt(message, ui.ButtonSet.OK_CANCEL);
+
   // データベースへの登録
-  
+  // membersへの登録
+  members.addMember(familyName);
+  // charactersへの登録
+  characters = new Characters(members.indexNo);
+  characters.addCharacter(members.indexNo, characterName);
+
+  // 登録完了メッセージ
+  ui.alert('家名の新規登録が完了しました。');
 }
 
 /*
