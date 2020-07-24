@@ -1,0 +1,23 @@
+{
+  "name": "node_war_attendance",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flyingPenpenguin/node_war_attendance.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/flyingPenpenguin/node_war_attendance/issues"
+  },
+  "homepage": "https://github.com/flyingPenpenguin/node_war_attendance#readme",
+  "dependencies": {
+    "@types/google-apps-script": "^1.0.14"
+  }
+}
