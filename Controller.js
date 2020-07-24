@@ -32,7 +32,14 @@ function addMembers()
   
   // 重複の確認
   members = new Members();
-  ui.alert(members.indexNo);
+  // すでに家名が存在している場合は退出
+  if (members.isDuplicate(familyName)) {
+    ui.alert('入力された家名はすでに存在しています。');
+    return;
+  }
+
+  // データベースへの登録
+  
 }
 
 /*

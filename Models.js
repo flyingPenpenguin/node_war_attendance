@@ -5,7 +5,7 @@ class Members {
     // シート取得
     this.membersSheet = SHEET.getSheetByName('members');
     // index noの取得
-    var ids = SHEET.getRange('A:A').getValues().filter(Number);
+    var ids      = SHEET.getRange('A:A').getValues().filter(Number);
     this.indexNo = Math.max.apply(null, ids) + 1;
   } 
   
@@ -18,11 +18,13 @@ class Members {
   isDuplicate(familyName) {
     var membersList = getMembersList();
     
-
+    if (inArray(familyName, membersList)) {
+      return true;
+    }
   }
 }
 
-// キャラクター名クラス
+// キャラクタークラス
 class Characters {
   
   constructor(id) {
@@ -40,14 +42,6 @@ class WarDates {
 
 // 参加記録クラス
 class AttendanceLogs {
-  
-  constructor(id) {
-    
-  }
-}
-
-// 拠点戦結果クラス
-class WarResults {
   
   constructor(id) {
     
@@ -72,9 +66,12 @@ function getLastRow(SHEET)
 */
 function inArray(needle, haystack)
 {
-    // TODO : in_array()みたいなのないの？？
     // familyNameがすでにmembersListの中に存在するか線形探索
     for (var i = 0; i < membersList.length; i++) {
-      
+      if (haystack[i] === needle) {
+        return true;
+      }
     }
+
+    return false;
 }
