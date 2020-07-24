@@ -6,9 +6,8 @@ const SHEET = SpreadsheetApp.getActiveSpreadsheet();
 // 最終行の取得
 var LAST_ROW = getLastRow(SHEET);
 
-
 /*
-* 新しいギルドメンバーの追加を行う
+* 新しいメンバーの追加を行う
 *
 * @param {void}
 * @return {void}
@@ -51,17 +50,3 @@ function sort()
   range.sort([{column: 9, ascending: true}]);
 }
 
-
-
-/******************************
-/ 汎用関数
-/******************************/
-/*
-* 最終行の取得
-*/
-function getLastRow(SHEET)
-{
-  // B列を基準に最終行を取得
-  var columnBVals = SHEET.getRange('B:B').getValues();
-  return columnBVals.filter(String).length;
-}

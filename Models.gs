@@ -8,6 +8,18 @@ class Members {
     var ids = SHEET.getRange('A:A').getValues().filter(Number);
     this.indexNo = Math.max.apply(null, ids) + 1;
   } 
+  
+  // メンバーの家名一覧を取得する
+  getMembersList() {
+    return SHEET.getRange('B:B').getValues().filter(String);
+  }
+  
+  // 入力された家名がデータベースに既に存在すればtrueを返す
+  isDuplicate(familyName) {
+    var membersList = getMembersList();
+    
+
+  }
 }
 
 // キャラクター名クラス
@@ -40,4 +52,29 @@ class WarResults {
   constructor(id) {
     
   }
+}
+
+/******************************
+/ 汎用関数
+/******************************/
+/*
+* 最終行の取得
+*/
+function getLastRow(SHEET)
+{
+  // B列を基準に最終行を取得
+  var columnBVals = SHEET.getRange('B:B').getValues();
+  return columnBVals.filter(String).length;
+}
+
+/*
+* 第一引数の要素が配列内に存在すればtrue
+*/
+function inArray(needle, haystack)
+{
+    // TODO : in_array()みたいなのないの？？
+    // familyNameがすでにmembersListの中に存在するか線形探索
+    for (var i = 0; i < membersList.length; i++) {
+      
+    }
 }
