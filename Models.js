@@ -12,12 +12,12 @@ class Members {
   
   // メンバーの家名一覧を取得する
   getMembersList() {
-    return membersSheet.getRange('B:B').getValues().filter(String);
+    return this.membersSheet.getRange(2, 2, getLastRowCustom(this.membersSheet) - 1).getValues().filter(String);
   }
   
   // 入力された家名がデータベースに既に存在すればtrueを返す
   isDuplicate(familyName) {
-    var membersList = getMembersList();
+    var membersList = this.getMembersList();
     
     if (inArray(familyName, membersList)) {
       return true;
@@ -27,12 +27,15 @@ class Members {
   // 家名の新規登録
   addMember(familyName) {
     // 最終行 = データ入力行の取得
-    var lastRow = getLastRowCustom(this.membersSheet);
+    var lastRow = this.membersSheet.getLastRow() + 1;
 
+    var ui = SpreadsheetApp.getUi();
+    ui.alert(lastRow);
+    
     // index no
-    membersSheet.getRange(lastRow, 1).setValue(this.indexNo);
+    this.membersSheet.getRange(lastRow, 1).setValue(this.indexNo);
     // 家名
-    membersSheet.getRange(lastRow, 2).setValue(familyName);
+    this.membersSheet.getRange(lastRow, 2).setValue(familyName);
   }
 }
 
@@ -44,23 +47,23 @@ class Characters {
     // シート取得
     this.charactersSheet = SHEET.getSheetByName('characters');
     // index noの取得
-    var ids      = charactersSheet.getRange('A:A').getValues().filter(Number);
+    var ids      = this.charactersSheet.getRange('A:A').getValues().filter(Number);
     this.indexNo = Math.max.apply(null, ids) + 1;
     // 当該家名に属するキャラクターのリスト
-    this.characters = charactersSheet.getRange(2, 3, getLastRowCustom(charactersSheet) - 1);
+    this.characters = this.charactersSheet.getRange(2, 3, getLastRowCustom(this.charactersSheet) - 1);
   }
 
-  // 家名の新規登録
+  // キャラクターの新規登録
   addCharacter(membersId, characterName) {
     // 最終行 = データ入力行の取得
-    var lastRow = getLastRowCustom(this.charactersSheet);
+    var lastRow = this.charactersSheet.getLastRow() + 1;
 
     // index no
-    charactersSheet.getRange(lastRow, 1).setValue(this.indexNo);
+    this.charactersSheet.getRange(lastRow, 1).setValue(membersId);
     // 家名id
-    charactersSheet.getRange(lastRow, 2).setValue(membersId);
+    this.charactersSheet.getRange(lastRow, 2).setValue(membersId);
     // キャラクター名
-    charactersSheet.getRange(lastRow, 2).setValue(characterName);
+    this.charactersSheet.getRange(lastRow, 3).setValue(characterName);
   }
 }
 
@@ -99,8 +102,8 @@ function getLastRowCustom(sheet)
 */
 function inArray(needle, haystack)
 {
-  // familyNameがすでにmembersListの中に存在するか線形探索
-  for (var i = 0; i < membersList.length; i++) {
+  // 第一引数の要素が第二引数の配列の中に存在するか線形探索
+  for (var i = 0; i < haystack.length; i++) {
     if (haystack[i] === needle) {
       return true;
     }

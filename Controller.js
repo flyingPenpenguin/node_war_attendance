@@ -26,8 +26,8 @@ function addMembers()
   
   // 家名の入力
   var message    = '家名を入力してください。';
-  var familyName = ui.prompt(message, ui.ButtonSet.OK_CANCEL);
-  
+  var familyName = ui.prompt(message, ui.ButtonSet.OK_CANCEL).getResponseText();
+
   // 重複の確認
   members = new Members();
   // すでに家名が存在している場合は退出
@@ -38,7 +38,7 @@ function addMembers()
 
   // 初回登録なのでキャラクター名の登録も同時に行う
   var message       = 'キャラクター名を入力してください。';
-  var characterName = ui.prompt(message, ui.ButtonSet.OK_CANCEL);
+  var characterName = ui.prompt(message, ui.ButtonSet.OK_CANCEL).getResponseText();
 
   // データベースへの登録
   // membersへの登録
